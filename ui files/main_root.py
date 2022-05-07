@@ -140,6 +140,9 @@ class Ui_MainWindow(object):
         self.di_nsd_savz_count_box_2.setGeometry(QtCore.QRect(140, 30, 42, 22))
         self.di_nsd_savz_count_box_2.setMinimum(1)
         self.di_nsd_savz_count_box_2.setObjectName("di_nsd_savz_count_box_2")
+        self.done_button = QtWidgets.QPushButton(self.centralwidget)
+        self.done_button.setGeometry(QtCore.QRect(70, 290, 75, 23))
+        self.done_button.setObjectName("done_button")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 499, 21))
@@ -176,6 +179,7 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "Установка НСД"))
         self.label_9.setText(_translate("MainWindow", "Проведение СИ"))
         self.label_10.setText(_translate("MainWindow", "Установка Сонаты"))
+        self.done_button.setText(_translate("MainWindow", "Выполнить"))
 
 
 if __name__ == "__main__":
