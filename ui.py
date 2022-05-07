@@ -16,6 +16,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.att_vp_box.toggled.connect(self.show_vp_widgets)
         self.ui.di_pemin_box.toggled.connect(self.show_di_widgets)
         self.ui.di_nsd_box.toggled.connect(self.show_di_widgets)
+        self.ui.done_button.clicked.connect(self.execute)
+
+    def execute(self):
+        states = {}
 
     def hide_widgets(self):
         self.ui.att_as_count_box.hide()
