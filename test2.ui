@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>420</width>
+    <height>517</height>
+   </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: qlineargradient(spread:reflect, x1:0, y1:0.051, x2:1, y2:1, stop:0.102273 rgba(21, 46, 21, 255), stop:1 rgba(171, 255, 182, 255));</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>440</y>
+      <width>401</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial Black</family>
+      <pointsize>13</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qradialgradient(spread:pad, cx:0.514, cy:0.422631, radius:0.504, fx:0.766, fy:0.283184, stop:0 rgba(255, 140, 0, 255), stop:1 rgba(255, 170, 0, 255));
+gridline-color: rgb(0, 170, 0);
+
+border-color: rgb(64, 255, 6);
+border-radius: 10</string>
+    </property>
+    <property name="text">
+     <string>Далее</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>391</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>IBeamCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qradialgradient(spread:pad, cx:0.514, cy:0.422631, radius:0.504, fx:0.766, fy:0.283184, stop:0 rgba(255, 140, 0, 255), stop:1 rgba(255, 170, 0, 255));
+font: 87 14pt &quot;Arial Black&quot;;
+gridline-color: rgb(0, 170, 0);
+border-color: rgb(64, 255, 6);
+border-radius: 10</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Name_work">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>391</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qradialgradient(spread:pad, cx:0.514, cy:0.422631, radius:0.504, fx:0.766, fy:0.283184, stop:0 rgba(255, 140, 0, 255), stop:1 rgba(255, 170, 0, 255));
+font: 87 14pt &quot;Arial Black&quot;;
+gridline-color: rgb(0, 170, 0);
+qproperty-alignment: AlignCenter;
+border-color: rgb(64, 255, 6);
+border-radius: 7</string>
+    </property>
+    <property name="text">
+     <string>Название объекта</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>391</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qradialgradient(spread:pad, cx:0.514, cy:0.422631, radius:0.504, fx:0.766, fy:0.283184, stop:0 rgba(255, 140, 0, 255), stop:1 rgba(255, 170, 0, 255));
+font: 87 14pt &quot;Arial Black&quot;;
+gridline-color: rgb(0, 170, 0);
+qproperty-alignment: AlignCenter;
+border-color: rgb(64, 255, 6);
+border-radius: 7</string>
+    </property>
+    <property name="text">
+     <string>Тип Работ</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="type_work">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>391</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qradialgradient(spread:pad, cx:0.514, cy:0.422631, radius:0.504, fx:0.766, fy:0.283184, stop:0 rgba(255, 140, 0, 255), stop:1 rgba(255, 170, 0, 255));
+font: 87 14pt &quot;Arial Black&quot;;
+gridline-color: rgb(0, 170, 0);
+qproperty-alignment: AlignCenter;
+border-color: rgb(64, 255, 6);
+border-radius: 10</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Аттестация</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Контрольная проверка</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Тестирование</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Доп испытания</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
