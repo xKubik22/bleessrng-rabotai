@@ -16,10 +16,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.att_vp_box.toggled.connect(self.show_vp_widgets)
         self.ui.di_pemin_box.toggled.connect(self.show_di_widgets)
         self.ui.di_nsd_box.toggled.connect(self.show_di_widgets)
-        self.ui.done_button.clicked.connect(self.execute)
+        # self.ui.done_button.clicked.connect(self.execute)
 
-    def execute(self):
-        if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.enabled():
+    # def execute(self):
+    #     if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.enabled():
 
 
 
