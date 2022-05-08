@@ -8,5 +8,3 @@ wb_w.close()
 
 wb_r = openpyxl.load_workbook('ZP.xlsx')
 print(wb_r.active.cell(1,1).value)
-
-
