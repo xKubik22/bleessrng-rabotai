@@ -19,7 +19,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.done_button.clicked.connect(self.execute)
 
     def execute(self):
-        states = {}
+        if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.enabled():
+
+
+
 
     def hide_widgets(self):
         self.ui.att_as_count_box.hide()
