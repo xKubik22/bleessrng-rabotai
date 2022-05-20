@@ -4,6 +4,7 @@ import sys
 cwd = os.getcwd()
 sys.path.append(cwd + "\\ui files")
 import main_root
+from object import Object
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -16,13 +17,40 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.att_vp_box.toggled.connect(self.show_vp_widgets)
         self.ui.di_pemin_box.toggled.connect(self.show_di_widgets)
         self.ui.di_nsd_box.toggled.connect(self.show_di_widgets)
-        # self.ui.done_button.clicked.connect(self.execute)
+        self.ui.done_button.clicked.connect(self.execute)
 
-    # def execute(self):
-    #     if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.enabled():
+    def execute(self):
+        works = []
+        if self.ui.att_as_box.isChecked() and self.ui.att_as_box.isEnabled():
+            works.append(f'Аттестация {self.ui.att_as_count_box.value()} АС')
 
+        if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.isEnabled():
+            works.append('Аттестация ВП')
+            works.append(f'Монтаж {self.ui.pelena_count_box.value()} экранов')
+            works.append(f'Монтаж {self.ui.vsh_count_box.value()} ВШ')
+            works.append(f'Монтаж {self.ui.vibrik_count_box.value()} вибриков')
 
+        if self.ui.di_nsd_box.isChecked() and self.ui.di_nsd_box.isEnabled():
+            works.append(f'{self.ui.di_nsd_win_count_box.value()} установок винды')
+            works.append(f'{self.ui.di_nsd_savz_count_box.value()} установок антивируса')
+            works.append(f'{self.ui.di_nsd_szi_count_box.value()} установок СЗИ')
+            works.append(f'{self.ui.di_nsd_szi_count_box.value()} установок СЗИ')
+            if self.ui.di_nsd_adm_instruction_box.isChecked():
+                works.append(f'С инструкцией администратора')
+            else:
+                works.append(f'Без инструкции администратора')
 
+            if self.ui.di_nsd_polz_box.isChecked():
+                works.append(f'С разрешиловкой')
+            else:
+                works.append(f'Без разрешиловки')
+
+        if self.ui.di_nsd_box.isChecked() and self.ui.di_nsd_box.isEnabled():
+            works.append(f'{self.ui.di_pemin_si_count_box.value()} СИ')
+            works.append(f'{self.ui.di_pemin_szi_count_box.value()} установок НСД от ПЭМИН')
+
+        obj = Object(self.ui.obj_name_entery.text(), works)
+        print(obj.get_object_info())
 
     def hide_widgets(self):
         self.ui.att_as_count_box.hide()

@@ -344,7 +344,10 @@
       </rect>
      </property>
      <property name="minimum">
-      <number>1</number>
+      <number>0</number>
+     </property>
+     <property name="value">
+      <number>0</number>
      </property>
     </widget>
     <widget class="QLabel" name="label_7">
@@ -370,7 +373,10 @@
       </rect>
      </property>
      <property name="minimum">
-      <number>1</number>
+      <number>0</number>
+     </property>
+     <property name="value">
+      <number>0</number>
      </property>
     </widget>
     <widget class="QLabel" name="label_5">
@@ -409,7 +415,10 @@
       </rect>
      </property>
      <property name="minimum">
-      <number>1</number>
+      <number>0</number>
+     </property>
+     <property name="value">
+      <number>0</number>
      </property>
     </widget>
    </widget>
@@ -428,7 +437,7 @@
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
     </property>
-    <widget class="QSpinBox" name="di_nsd_win_count_box_2">
+    <widget class="QSpinBox" name="di_pemin_szi_count_box">
      <property name="geometry">
       <rect>
        <x>140</x>
@@ -438,7 +447,10 @@
       </rect>
      </property>
      <property name="minimum">
-      <number>1</number>
+      <number>0</number>
+     </property>
+     <property name="value">
+      <number>0</number>
      </property>
     </widget>
     <widget class="QLabel" name="label_9">
@@ -467,7 +479,7 @@
       <string>Установка Сонаты</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="di_nsd_savz_count_box_2">
+    <widget class="QSpinBox" name="di_pemin_si_count_box">
      <property name="geometry">
       <rect>
        <x>140</x>
@@ -477,7 +489,10 @@
       </rect>
      </property>
      <property name="minimum">
-      <number>1</number>
+      <number>0</number>
+     </property>
+     <property name="value">
+      <number>0</number>
      </property>
     </widget>
    </widget>
@@ -504,8 +519,20 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Настроить</string>
+    </property>
+    <addaction name="action"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>Путь до отчета</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
