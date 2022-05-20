@@ -6,6 +6,29 @@ sys.path.append(cwd + "\\ui files")
 import main_root
 from object import Object
 
+names = \
+            {
+                # индексы работ для таблицы
+                'Аттестация АС': 0,
+                'Аттестация ВП': 1,
+                'Аттестация ИСПДн': 2,
+                'КП': 3,
+                'ДИ НСД': 4,
+                'ДИ ПЭМИН': 5,
+                'Тестирование': 6,
+                'Пелена': 7,
+                'ВШ': 8,
+                'Вибрики': 9,
+                'Винда': 11,
+                'САВЗ': 12,
+                'СЗИ от НСД': 13,
+                'Сис Админ': 14,
+                'Разрешиловка': 15,
+                'Соната': 16,
+                'СИ': 17,
+                'Другое': 18,
+            }
+
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -13,41 +36,53 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = main_root.Ui_MainWindow()
         self.ui.setupUi(self)
         self.hide_widgets()
+        self.ui.other_commentary.setEnabled(False)
         self.ui.att_as_box.toggled.connect(self.show_as_widgets)
         self.ui.att_vp_box.toggled.connect(self.show_vp_widgets)
         self.ui.di_pemin_box.toggled.connect(self.show_di_widgets)
         self.ui.di_nsd_box.toggled.connect(self.show_di_widgets)
+        self.ui.other_box.toggled.connect(self.enable_commentary)
         self.ui.done_button.clicked.connect(self.execute)
 
     def execute(self):
-        works = []
+        works = [0] * 19
+        global names
+
         if self.ui.att_as_box.isChecked() and self.ui.att_as_box.isEnabled():
-            works.append(f'Аттестация {self.ui.att_as_count_box.value()} АС')
+            works[names['Аттестация АС']] = self.ui.att_as_count_box.value()
 
         if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.isEnabled():
-            works.append('Аттестация ВП')
-            works.append(f'Монтаж {self.ui.pelena_count_box.value()} экранов')
-            works.append(f'Монтаж {self.ui.vsh_count_box.value()} ВШ')
-            works.append(f'Монтаж {self.ui.vibrik_count_box.value()} вибриков')
+            works[names['Аттестация Вп']] = 1
+            works[names['Пелена']] = self.ui.pelena_count_box.value()
+            works[names['ВШ']] = self.ui.vsh_count_box.value()
+            works[names['Вибрики']] = self.ui.vibrik_count_box.value()
+
+        if self.ui.att_pdn_box.isChecked() and self.ui.att_pdn_box.isEnabled():
+            works[names['Аттестация ИСПДн']] = 1
+
+        if self.ui.kp_box.isChecked() and self.ui.kp_box.isEnabled():
+            works[names['КП']] = 1
+
+        if self.ui.test_box.isChecked() and self.ui.test_box.isEnabled():
+            works[names['Тестирование']] = 1
 
         if self.ui.di_nsd_box.isChecked() and self.ui.di_nsd_box.isEnabled():
-            works.append(f'{self.ui.di_nsd_win_count_box.value()} установок винды')
-            works.append(f'{self.ui.di_nsd_savz_count_box.value()} установок антивируса')
-            works.append(f'{self.ui.di_nsd_szi_count_box.value()} установок СЗИ')
-            works.append(f'{self.ui.di_nsd_szi_count_box.value()} установок СЗИ')
+            works[names['Винда']] = self.ui.di_nsd_win_count_box.value()
+            works[names['САВЗ']] = self.ui.di_nsd_savz_count_box.value()
+            works[names['СЗИ от НСД']] = self.ui.di_nsd_szi_count_box.value()
+
             if self.ui.di_nsd_adm_instruction_box.isChecked():
-                works.append(f'С инструкцией администратора')
-            else:
-                works.append(f'Без инструкции администратора')
+                works[names['Сис Админ']] = 1
 
             if self.ui.di_nsd_polz_box.isChecked():
-                works.append(f'С разрешиловкой')
-            else:
-                works.append(f'Без разрешиловки')
+                works[names['Разрешиловка']] = 1
 
-        if self.ui.di_nsd_box.isChecked() and self.ui.di_nsd_box.isEnabled():
-            works.append(f'{self.ui.di_pemin_si_count_box.value()} СИ')
-            works.append(f'{self.ui.di_pemin_szi_count_box.value()} установок НСД от ПЭМИН')
+        if self.ui.other_box.isChecked() and self.ui.other_commentary.isEnabled():
+            works[names['Другое']] = self.ui.other_commentary.text()
+
+        if self.ui.di_pemin_box.isChecked() and self.ui.di_pemin_box.isEnabled():
+            works[names['СИ']] = self.ui.di_pemin_si_count_box.value()
+            works[names['Соната']] = self.ui.di_pemin_szi_count_box.value()
 
         obj = Object(self.ui.obj_name_entery.text(), works)
         print(obj.get_object_info())
@@ -57,6 +92,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.frame_vp.hide()
         self.ui.frame_di_pemin.hide()
         self.ui.frame_di_nsd.hide()
+
+    def enable_commentary(self):
+        if self.ui.other_box.isChecked():
+            self.ui.other_commentary.setEnabled(True)
+        else:
+            self.ui.other_commentary.setEnabled(False)
 
     def show_widgets(self):
         self.ui.att_as_count_box.show()

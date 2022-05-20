@@ -1,4 +1,3 @@
-import xlsxwriter
 import openpyxl
 import os.path
 

@@ -3,7 +3,7 @@ from typing import List
 
 
 class Object:
-    def __init__(self, name: str, works: List[str]):
+    def __init__(self, name: str, works: List):
         self.name = name
         self.works = works
         self.price = self.calculate_price()
@@ -20,5 +20,5 @@ class Object:
 
 
 if __name__ == "__main__":
-    a = Object('Упрдор', ['ДИ ПЭМИН', 'ДИ НСД', 'КП'])
+    a = Object('Упрдор', [0, 'ДИ ПЭМИН', 'ДИ НСД', 'КП'])
     print(a.get_object_info())
