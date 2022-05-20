@@ -1,33 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import sys
+from object import Object
+from works_indexes import indexes
 cwd = os.getcwd()
 sys.path.append(cwd + "\\ui files")
 import main_root
-from object import Object
-
-names = \
-            {
-                # индексы работ для таблицы
-                'Аттестация АС': 0,
-                'Аттестация ВП': 1,
-                'Аттестация ИСПДн': 2,
-                'КП': 3,
-                'ДИ НСД': 4,
-                'ДИ ПЭМИН': 5,
-                'Тестирование': 6,
-                'Пелена': 7,
-                'ВШ': 8,
-                'Вибрики': 9,
-                'Винда': 11,
-                'САВЗ': 12,
-                'СЗИ от НСД': 13,
-                'Сис Админ': 14,
-                'Разрешиловка': 15,
-                'Соната': 16,
-                'СИ': 17,
-                'Другое': 18,
-            }
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -46,43 +24,43 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def execute(self):
         works = [0] * 19
-        global names
+        index = indexes
 
         if self.ui.att_as_box.isChecked() and self.ui.att_as_box.isEnabled():
-            works[names['Аттестация АС']] = self.ui.att_as_count_box.value()
+            works[index['Аттестация АС']] = self.ui.att_as_count_box.value()
 
         if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.isEnabled():
-            works[names['Аттестация Вп']] = 1
-            works[names['Пелена']] = self.ui.pelena_count_box.value()
-            works[names['ВШ']] = self.ui.vsh_count_box.value()
-            works[names['Вибрики']] = self.ui.vibrik_count_box.value()
+            works[index['Аттестация Вп']] = 1
+            works[index['Пелена']] = self.ui.pelena_count_box.value()
+            works[index['ВШ']] = self.ui.vsh_count_box.value()
+            works[index['Вибрики']] = self.ui.vibrik_count_box.value()
 
         if self.ui.att_pdn_box.isChecked() and self.ui.att_pdn_box.isEnabled():
-            works[names['Аттестация ИСПДн']] = 1
+            works[index['Аттестация ИСПДн']] = 1
 
         if self.ui.kp_box.isChecked() and self.ui.kp_box.isEnabled():
-            works[names['КП']] = 1
+            works[index['КП']] = 1
 
         if self.ui.test_box.isChecked() and self.ui.test_box.isEnabled():
-            works[names['Тестирование']] = 1
+            works[index['Тестирование']] = 1
 
         if self.ui.di_nsd_box.isChecked() and self.ui.di_nsd_box.isEnabled():
-            works[names['Винда']] = self.ui.di_nsd_win_count_box.value()
-            works[names['САВЗ']] = self.ui.di_nsd_savz_count_box.value()
-            works[names['СЗИ от НСД']] = self.ui.di_nsd_szi_count_box.value()
+            works[index['Винда']] = self.ui.di_nsd_win_count_box.value()
+            works[index['САВЗ']] = self.ui.di_nsd_savz_count_box.value()
+            works[index['СЗИ от НСД']] = self.ui.di_nsd_szi_count_box.value()
 
             if self.ui.di_nsd_adm_instruction_box.isChecked():
-                works[names['Сис Админ']] = 1
+                works[index['Сис Админ']] = 1
 
             if self.ui.di_nsd_polz_box.isChecked():
-                works[names['Разрешиловка']] = 1
+                works[index['Разрешиловка']] = 1
 
         if self.ui.other_box.isChecked() and self.ui.other_commentary.isEnabled():
-            works[names['Другое']] = self.ui.other_commentary.text()
+            works[index['Другое']] = self.ui.other_commentary.text()
 
         if self.ui.di_pemin_box.isChecked() and self.ui.di_pemin_box.isEnabled():
-            works[names['СИ']] = self.ui.di_pemin_si_count_box.value()
-            works[names['Соната']] = self.ui.di_pemin_szi_count_box.value()
+            works[index['СИ']] = self.ui.di_pemin_si_count_box.value()
+            works[index['Соната']] = self.ui.di_pemin_szi_count_box.value()
 
         obj = Object(self.ui.obj_name_entery.text(), works)
         print(obj.get_object_info())
