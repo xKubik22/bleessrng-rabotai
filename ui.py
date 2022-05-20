@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import sys
+from object import Object
+from works_indexes import indexes
 cwd = os.getcwd()
 sys.path.append(cwd + "\\ui files")
 import main_root
@@ -12,23 +14,68 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = main_root.Ui_MainWindow()
         self.ui.setupUi(self)
         self.hide_widgets()
+        self.ui.other_commentary.setEnabled(False)
         self.ui.att_as_box.toggled.connect(self.show_as_widgets)
         self.ui.att_vp_box.toggled.connect(self.show_vp_widgets)
         self.ui.di_pemin_box.toggled.connect(self.show_di_widgets)
         self.ui.di_nsd_box.toggled.connect(self.show_di_widgets)
+        self.ui.other_box.toggled.connect(self.enable_commentary)
         self.ui.done_button.clicked.connect(self.execute)
 
     def execute(self):
-        if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.enabled():
+        works = [0] * 19
+        index = indexes
 
+        if self.ui.att_as_box.isChecked() and self.ui.att_as_box.isEnabled():
+            works[index['Аттестация АС']] = self.ui.att_as_count_box.value()
 
+        if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.isEnabled():
+            works[index['Аттестация Вп']] = 1
+            works[index['Пелена']] = self.ui.pelena_count_box.value()
+            works[index['ВШ']] = self.ui.vsh_count_box.value()
+            works[index['Вибрики']] = self.ui.vibrik_count_box.value()
 
+        if self.ui.att_pdn_box.isChecked() and self.ui.att_pdn_box.isEnabled():
+            works[index['Аттестация ИСПДн']] = 1
+
+        if self.ui.kp_box.isChecked() and self.ui.kp_box.isEnabled():
+            works[index['КП']] = 1
+
+        if self.ui.test_box.isChecked() and self.ui.test_box.isEnabled():
+            works[index['Тестирование']] = 1
+
+        if self.ui.di_nsd_box.isChecked() and self.ui.di_nsd_box.isEnabled():
+            works[index['Винда']] = self.ui.di_nsd_win_count_box.value()
+            works[index['САВЗ']] = self.ui.di_nsd_savz_count_box.value()
+            works[index['СЗИ от НСД']] = self.ui.di_nsd_szi_count_box.value()
+
+            if self.ui.di_nsd_adm_instruction_box.isChecked():
+                works[index['Сис Админ']] = 1
+
+            if self.ui.di_nsd_polz_box.isChecked():
+                works[index['Разрешиловка']] = 1
+
+        if self.ui.other_box.isChecked() and self.ui.other_commentary.isEnabled():
+            works[index['Другое']] = self.ui.other_commentary.text()
+
+        if self.ui.di_pemin_box.isChecked() and self.ui.di_pemin_box.isEnabled():
+            works[index['СИ']] = self.ui.di_pemin_si_count_box.value()
+            works[index['Соната']] = self.ui.di_pemin_szi_count_box.value()
+
+        obj = Object(self.ui.obj_name_entery.text(), works)
+        print(obj.get_object_info())
 
     def hide_widgets(self):
         self.ui.att_as_count_box.hide()
         self.ui.frame_vp.hide()
         self.ui.frame_di_pemin.hide()
         self.ui.frame_di_nsd.hide()
+
+    def enable_commentary(self):
+        if self.ui.other_box.isChecked():
+            self.ui.other_commentary.setEnabled(True)
+        else:
+            self.ui.other_commentary.setEnabled(False)
 
     def show_widgets(self):
         self.ui.att_as_count_box.show()
