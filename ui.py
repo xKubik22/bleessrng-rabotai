@@ -64,6 +64,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         obj = Object(self.ui.obj_name_entery.text(), works)
         print(obj.get_object_info())
+        print(works)
 
     def hide_widgets(self):
         self.ui.att_as_count_box.hide()
