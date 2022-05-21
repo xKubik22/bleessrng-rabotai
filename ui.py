@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import sys
+
+from config import Config
 from object import Object
 from works_indexes import indexes
 from write_works import WorksAdder
@@ -27,18 +29,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def get_calc_file_path(self):
         path = QtWidgets.QFileDialog.getOpenFileName(self, 'Выбор файла расчета')[0]
-        print(path)
         if len(path) != 0:
             path = path.replace('/', '\\')
-            with open('user_settings.txt', mode='r', encoding='utf-8') as file:
-                lines = file.readlines()
-
-            with open('user_settings.txt', mode='w', encoding='utf-8') as file:
-                for line in lines:
-                    if 'path_to_calc_file' in line:
-                        file.write(f"path_to_calc_file = {path}")
-                    else:
-                        file.write(line)
+            Config.change_calc_file_path(path)
 
     def get_works(self):
             works = [0] * 19

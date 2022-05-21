@@ -1,13 +1,13 @@
 import openpyxl
-import config
+from config import Config
 from works_indexes import indexes
 
 
 class WorksAdder:
-	PATH = config.path_to_calc_file
+	PATH = Config.PATH_TO_CALC_FILE
 
 	def __init__(self, obj):
-		print(WorksAdder.PATH)
+		self.init_path()
 		self.price_list = self.get_price_list()
 		self.works = obj.get_works()
 		price = self.calculate_price()
@@ -15,6 +15,14 @@ class WorksAdder:
 		works_info.extend(self.works)
 		works_info.append(price)
 		self.write_object_works(works_info)
+		self.__del__()
+
+	@classmethod
+	def init_path(cls):
+		cls.PATH = Config.PATH_TO_CALC_FILE
+
+	def __del__(self):
+		pass
 
 	@classmethod
 	def check_list(cls, workbook, list_name: str) -> bool:
@@ -42,15 +50,17 @@ class WorksAdder:
 
 		if len(price_list_done) == 0:
 			return price_list_done
-
-		price_list_done.pop(None)
-		workbook.close()
-		return price_list_done
+		try:
+			price_list_done.pop(None)
+			workbook.close()
+		finally:
+			return price_list_done
 
 	def calculate_price(self) -> int:
 		total_price = 0
 		if len(self.price_list) == 0:
-			print('Необходимо заполнить лист "Цены" в файле ZP.xlsx')
+			print(f'Необходимо заполнить лист "Цены" в файле {WorksAdder.PATH}')
+			self.__del__()
 
 		for key in self.price_list.keys():
 			total_price += int(self.price_list[key]) * self.works[indexes[key]]
@@ -62,7 +72,6 @@ class WorksAdder:
 		try:
 			workbook = openpyxl.load_workbook(cls.PATH)
 		except FileNotFoundError:
-			print(1)
 			workbook = openpyxl.Workbook()
 			workbook.save(cls.PATH)
 
