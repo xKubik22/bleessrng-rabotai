@@ -20,6 +20,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.di_pemin_box.toggled.connect(self.show_di_widgets)
         self.ui.di_nsd_box.toggled.connect(self.show_di_widgets)
         self.ui.other_box.toggled.connect(self.enable_commentary)
+        self.ui.att_pdn_box.toggled.connect(self.show_pdn_widgets)
         self.ui.done_button.clicked.connect(self.execute)
 
     def execute(self):
@@ -65,6 +66,13 @@ class MainWindow(QtWidgets.QMainWindow):
         obj = Object(self.ui.obj_name_entery.text(), works)
         print(obj.get_object_info())
         print(works)
+
+    def show_pdn_widgets(self):
+        if self.ui.att_pdn_box.isChecked():
+            self.disable_check_boxes()
+            self.ui.att_pdn_box.setEnabled(True)
+        else:
+            self.enable_check_boxes()
 
     def hide_widgets(self):
         self.ui.att_as_count_box.hide()

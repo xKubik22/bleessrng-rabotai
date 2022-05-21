@@ -1,4 +1,4 @@
-import price_calculation
+from price_calculation import calculate_price
 from typing import List
 
 
@@ -9,8 +9,7 @@ class Object:
         self.price = self.calculate_price()
 
     def calculate_price(self) -> int:
-        self.works = self.works
-        return 100
+        return calculate_price(self.works)
 
     def get_object_info(self) -> List:
         info = [self.name]
@@ -20,5 +19,4 @@ class Object:
 
 
 if __name__ == "__main__":
-    a = Object('Упрдор', [0, 'ДИ ПЭМИН', 'ДИ НСД', 'КП'])
-    print(a.get_object_info())
+    pass
