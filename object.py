@@ -1,21 +1,16 @@
-from price_calculation import calculate_price
 from typing import List
 
 
 class Object:
     def __init__(self, name: str, works: List):
-        self.name = name
-        self.works = works
-        self.price = self.calculate_price()
+        self._name = name
+        self._works = works
 
-    def calculate_price(self) -> int:
-        return calculate_price(self.works)
+    def get_works(self):
+        return self._works
 
-    def get_object_info(self) -> List:
-        info = [self.name]
-        info.extend(self.works)
-        info.append(self.price)
-        return info
+    def get_name(self):
+        return self._name
 
 
 if __name__ == "__main__":

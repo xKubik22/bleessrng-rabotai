@@ -1,20 +1,82 @@
 import openpyxl
-from price_calculation import max_rows
+from works_indexes import indexes
 
 
-def write_object_works():
-	# wb_w = openpyxl.load_workbook('ZP.xlsx')
-	# ws_w = wb_w['Расчет']
-	last_row = max_rows('Расчет')
-	ws_w.cell(row = last_row, column = 1)
-	ws_w.append(object_info)
-	# wb_w.save('ZP.xlsx')
+class WorksAdder:
+	PATH = 'ZP.xlsx'
 
+	def __init__(self, obj):
+		self.price_list = self.get_price_list()
+		self.works = obj.get_works()
+		price = self.calculate_price()
+		works_info = [obj.get_name()]
+		works_info.extend(self.works)
+		works_info.append(price)
+		self.write_object_works(works_info)
+
+	@classmethod
+	def check_list(cls, workbook, list_name: str) -> bool:
+		if list_name not in workbook.sheetnames:
+			workbook.create_sheet(list_name)
+			workbook.save(cls.PATH)
+			print(f'В файле {cls.PATH} отсутсвовал лист {list_name}, который нужно заполнить')
+			return True
+
+		return False
+
+	@classmethod
+	def get_price_list(cls) -> dict:
+		workbook = cls.get_workbook()
+		price_list = []
+		if not cls.check_list(workbook, 'Цены'):
+			return None
+
+		worksheet = workbook['Цены']
+		for row in worksheet.iter_rows(min_row=0, max_row=worksheet.max_row - 1, max_col=worksheet.max_column, min_col=1):
+			for cell in row:
+				price_list.append(cell.value)
+
+		price_list_done = {price_list[i]: price_list[i + 1] for i in range(0, len(price_list) - 1, 2)}
+
+		if len(price_list_done) == 0:
+			return None
+
+		price_list_done.pop(None)
+		workbook.close()
+		return price_list_done
+
+	def calculate_price(self) -> int:
+		total_price = 0
+		try:
+			for key in self.price_list.keys():
+				total_price += int(self.price_list[key]) * self.works[indexes[key]]
+		except AttributeError:
+			print('Необходимо заполнить лист "Цены" в файле ZP.xlsx')
+
+		return total_price
+
+	@classmethod
+	def get_workbook(cls):
+		try:
+			workbook = openpyxl.load_workbook(cls.PATH)
+		except FileNotFoundError:
+			workbook = openpyxl.Workbook()
+			workbook.save(WorksAdder.PATH)
+
+		return workbook
+
+	@classmethod
+	def write_object_works(cls, object_info):
+		workbook = cls.get_workbook()
+		if cls.check_list(workbook, 'Расчет'):
+			worksheet = workbook['Расчет']
+			worksheet.cell(row=worksheet.max_row, column=1)
+			worksheet.append(object_info)
+			workbook.save(cls.PATH)
+			workbook.close()
 
 
 if __name__ == "__main__":
-	wb_w = openpyxl.load_workbook('ZP.xlsx')
-	ws_w = wb_w['Расчет']
 	object_info = ['какая-то херь', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100]
-	write_object_works()
-	wb_w.save('ZP.xlsx')
+	write_object_works(object_info)
+

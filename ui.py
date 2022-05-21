@@ -3,6 +3,7 @@ import os
 import sys
 from object import Object
 from works_indexes import indexes
+from write_works import WorksAdder
 cwd = os.getcwd()
 sys.path.append(cwd + "\\ui files")
 import main_root
@@ -68,6 +69,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def execute(self):
         works = self.get_works()
         obj = Object(self.ui.obj_name_entery.text(), works)
+        WorksAdder(obj)
 
     def show_pdn_widgets(self):
         if self.ui.att_pdn_box.isChecked():
