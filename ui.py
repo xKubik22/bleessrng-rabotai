@@ -23,48 +23,64 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.other_box.toggled.connect(self.enable_commentary)
         self.ui.att_pdn_box.toggled.connect(self.show_pdn_widgets)
         self.ui.done_button.clicked.connect(self.execute)
+        self.ui.file_path_button.triggered.connect(self.get_calc_file_path)
+
+    def get_calc_file_path(self):
+        path = QtWidgets.QFileDialog.getOpenFileName(self, 'Выбор файла расчета')[0]
+        print(path)
+        if len(path) != 0:
+            path = path.replace('/', '\\')
+            with open('user_settings.txt', mode='r', encoding='utf-8') as file:
+                lines = file.readlines()
+
+            with open('user_settings.txt', mode='w', encoding='utf-8') as file:
+                for line in lines:
+                    if 'path_to_calc_file' in line:
+                        file.write(f"path_to_calc_file = {path}")
+                    else:
+                        file.write(line)
 
     def get_works(self):
-        works = [0] * 19
-        index = indexes
+            works = [0] * 19
+            index = indexes
 
-        if self.ui.att_as_box.isChecked() and self.ui.att_as_box.isEnabled():
-            works[index['Аттестация АС']] = self.ui.att_as_count_box.value()
+            if self.ui.att_as_box.isChecked() and self.ui.att_as_box.isEnabled():
+                works[index['Аттестация АС']] = self.ui.att_as_count_box.value()
 
-        if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.isEnabled():
-            works[index['Аттестация Вп']] = 1
-            works[index['Пелена']] = self.ui.pelena_count_box.value()
-            works[index['ВШ']] = self.ui.vsh_count_box.value()
-            works[index['Вибрики']] = self.ui.vibrik_count_box.value()
+            if self.ui.att_vp_box.isChecked() and self.ui.att_vp_box.isEnabled():
+                works[index['Аттестация Вп']] = 1
+                works[index['Пелена']] = self.ui.pelena_count_box.value()
+                works[index['ВШ']] = self.ui.vsh_count_box.value()
+                works[index['Вибрики']] = self.ui.vibrik_count_box.value()
 
-        if self.ui.att_pdn_box.isChecked() and self.ui.att_pdn_box.isEnabled():
-            works[index['Аттестация ИСПДн']] = 1
+            if self.ui.att_pdn_box.isChecked() and self.ui.att_pdn_box.isEnabled():
+                works[index['Аттестация ИСПДн']] = 1
 
-        if self.ui.kp_box.isChecked() and self.ui.kp_box.isEnabled():
-            works[index['КП']] = 1
+            if self.ui.kp_box.isChecked() and self.ui.kp_box.isEnabled():
+                works[index['КП']] = 1
 
-        if self.ui.test_box.isChecked() and self.ui.test_box.isEnabled():
-            works[index['Тестирование']] = 1
+            if self.ui.test_box.isChecked() and self.ui.test_box.isEnabled():
+                works[index['Тестирование']] = 1
 
-        if self.ui.di_nsd_box.isChecked() and self.ui.di_nsd_box.isEnabled():
-            works[index['Винда']] = self.ui.di_nsd_win_count_box.value()
-            works[index['САВЗ']] = self.ui.di_nsd_savz_count_box.value()
-            works[index['СЗИ от НСД']] = self.ui.di_nsd_szi_count_box.value()
+            if self.ui.di_nsd_box.isChecked() and self.ui.di_nsd_box.isEnabled():
+                works[index['Винда']] = self.ui.di_nsd_win_count_box.value()
+                works[index['САВЗ']] = self.ui.di_nsd_savz_count_box.value()
+                works[index['СЗИ от НСД']] = self.ui.di_nsd_szi_count_box.value()
 
-            if self.ui.di_nsd_adm_instruction_box.isChecked():
-                works[index['Сис Админ']] = 1
+                if self.ui.di_nsd_adm_instruction_box.isChecked():
+                    works[index['Сис Админ']] = 1
 
-            if self.ui.di_nsd_polz_box.isChecked():
-                works[index['Разрешиловка']] = 1
+                if self.ui.di_nsd_polz_box.isChecked():
+                    works[index['Разрешиловка']] = 1
 
-        if self.ui.other_box.isChecked() and self.ui.other_commentary.isEnabled():
-            works[index['Другое']] = self.ui.other_commentary.text()
+            if self.ui.other_box.isChecked() and self.ui.other_commentary.isEnabled():
+                works[index['Другое']] = self.ui.other_commentary.text()
 
-        if self.ui.di_pemin_box.isChecked() and self.ui.di_pemin_box.isEnabled():
-            works[index['СИ']] = self.ui.di_pemin_si_count_box.value()
-            works[index['Соната']] = self.ui.di_pemin_szi_count_box.value()
+            if self.ui.di_pemin_box.isChecked() and self.ui.di_pemin_box.isEnabled():
+                works[index['СИ']] = self.ui.di_pemin_si_count_box.value()
+                works[index['Соната']] = self.ui.di_pemin_szi_count_box.value()
 
-        return works
+            return works
 
     def execute(self):
         works = self.get_works()

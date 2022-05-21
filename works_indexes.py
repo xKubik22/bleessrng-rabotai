@@ -1,6 +1,7 @@
 """
 Индексы работ из таблицы
 """
+path_to_calc_file = 'ZP.xlsx'
 
 indexes = \
             {

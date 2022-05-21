@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>499</width>
-    <height>435</height>
+    <height>447</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -509,6 +509,19 @@
      <string>Выполнить</string>
     </property>
    </widget>
+   <widget class="QLabel" name="statusbar">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>271</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -523,14 +536,13 @@
     <property name="title">
      <string>Настроить</string>
     </property>
-    <addaction name="action"/>
+    <addaction name="file_path_button"/>
    </widget>
    <addaction name="menu"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="action">
+  <action name="file_path_button">
    <property name="text">
-    <string>Путь до отчета</string>
+    <string>Путь до расчетки</string>
    </property>
   </action>
  </widget>

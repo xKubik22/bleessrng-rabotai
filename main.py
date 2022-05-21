@@ -1,19 +1,17 @@
+import os
+
+for k,v in os.environ.items():
+    print(f'{k} = {v}')
+
 
 
 if __name__ == '__main__':
-    # price = {'ДИ': 1000, 'КП': 200}
-    # print(price.values())
-    # print(price.keys())
-    # print(price.items())
-    # price.update({'Аттестация': 2000})
-    # print(price.items())
-    #
-    # values = [100, 200, 300, 400]
-    # names = ['1', '2', '3', '4']
-    # d = {names[i]: values[i] for i in range(len(names))}
-    #
-    # print(d.items())
+    with open('works_indexes.py', mode='r', encoding='utf-8') as file:
+        lines = file.readlines()
 
-    l = [1, 2, 4, 5, 6, 7, 8, 9, 10]
-    d = {l[i]: l[i + 1] for i in range(0, len(l) - 1, 2)}
-    print(d.items())
+    with open('works_indexes.py', mode='w', encoding='utf-8') as file:
+        for line in lines:
+            if 'path_to_calc_file' in line:
+                file.write("path_to_calc_file = 'ZP1.xlsx'\n\n")
+            else:
+                file.write(line)

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(499, 435)
+        MainWindow.resize(499, 447)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.obj_name_label = QtWidgets.QLabel(self.centralwidget)
@@ -148,6 +148,10 @@ class Ui_MainWindow(object):
         self.done_button = QtWidgets.QPushButton(self.centralwidget)
         self.done_button.setGeometry(QtCore.QRect(70, 290, 75, 23))
         self.done_button.setObjectName("done_button")
+        self.statusbar = QtWidgets.QLabel(self.centralwidget)
+        self.statusbar.setGeometry(QtCore.QRect(10, 400, 271, 16))
+        self.statusbar.setText("")
+        self.statusbar.setObjectName("statusbar")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 499, 21))
@@ -155,12 +159,9 @@ class Ui_MainWindow(object):
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
         MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-        self.action = QtWidgets.QAction(MainWindow)
-        self.action.setObjectName("action")
-        self.menu.addAction(self.action)
+        self.file_path_button = QtWidgets.QAction(MainWindow)
+        self.file_path_button.setObjectName("file_path_button")
+        self.menu.addAction(self.file_path_button)
         self.menubar.addAction(self.menu.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -192,7 +193,7 @@ class Ui_MainWindow(object):
         self.label_10.setText(_translate("MainWindow", "Установка Сонаты"))
         self.done_button.setText(_translate("MainWindow", "Выполнить"))
         self.menu.setTitle(_translate("MainWindow", "Настроить"))
-        self.action.setText(_translate("MainWindow", "Путь до отчета"))
+        self.file_path_button.setText(_translate("MainWindow", "Путь до расчетки"))
 
 
 if __name__ == "__main__":

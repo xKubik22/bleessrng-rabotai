@@ -1,11 +1,13 @@
 import openpyxl
+import config
 from works_indexes import indexes
 
 
 class WorksAdder:
-	PATH = 'ZP.xlsx'
+	PATH = config.path_to_calc_file
 
 	def __init__(self, obj):
+		print(WorksAdder.PATH)
 		self.price_list = self.get_price_list()
 		self.works = obj.get_works()
 		price = self.calculate_price()
@@ -20,16 +22,16 @@ class WorksAdder:
 			workbook.create_sheet(list_name)
 			workbook.save(cls.PATH)
 			print(f'В файле {cls.PATH} отсутсвовал лист {list_name}, который нужно заполнить')
-			return True
+			return False
 
-		return False
+		return True
 
 	@classmethod
 	def get_price_list(cls) -> dict:
 		workbook = cls.get_workbook()
 		price_list = []
 		if not cls.check_list(workbook, 'Цены'):
-			return None
+			return {}
 
 		worksheet = workbook['Цены']
 		for row in worksheet.iter_rows(min_row=0, max_row=worksheet.max_row - 1, max_col=worksheet.max_column, min_col=1):
@@ -39,7 +41,7 @@ class WorksAdder:
 		price_list_done = {price_list[i]: price_list[i + 1] for i in range(0, len(price_list) - 1, 2)}
 
 		if len(price_list_done) == 0:
-			return None
+			return price_list_done
 
 		price_list_done.pop(None)
 		workbook.close()
@@ -47,11 +49,11 @@ class WorksAdder:
 
 	def calculate_price(self) -> int:
 		total_price = 0
-		try:
-			for key in self.price_list.keys():
-				total_price += int(self.price_list[key]) * self.works[indexes[key]]
-		except AttributeError:
+		if len(self.price_list) == 0:
 			print('Необходимо заполнить лист "Цены" в файле ZP.xlsx')
+
+		for key in self.price_list.keys():
+			total_price += int(self.price_list[key]) * self.works[indexes[key]]
 
 		return total_price
 
@@ -60,8 +62,9 @@ class WorksAdder:
 		try:
 			workbook = openpyxl.load_workbook(cls.PATH)
 		except FileNotFoundError:
+			print(1)
 			workbook = openpyxl.Workbook()
-			workbook.save(WorksAdder.PATH)
+			workbook.save(cls.PATH)
 
 		return workbook
 
@@ -74,6 +77,7 @@ class WorksAdder:
 			worksheet.append(object_info)
 			workbook.save(cls.PATH)
 			workbook.close()
+
 
 
 if __name__ == "__main__":
