@@ -1,13 +1,6 @@
 import openpyxl
 from works_indexes import indexes 
 
-def max_rows(name_sheet):
-	wb_r = openpyxl.load_workbook('ZP.xlsx')
-	ws_r = wb_r[name_sheet]
-	max_rows = ws_r.max_row
-	print(max_rows)
-	return max_rows
-
 def read_price_list():
 	wb_r = openpyxl.load_workbook('ZP.xlsx')
 	ws_r = wb_r.active
