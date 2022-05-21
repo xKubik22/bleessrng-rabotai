@@ -13,6 +13,7 @@ def read_price_list():
 
 	if 'Цены' not in workbook.sheetnames:
 		workbook.create_sheet("Цены")
+		workbook.save('ZP.xlsx')
 		print('В файле ZP.xlsx отсутсвовал лист "Цены", который нужно заполнить')
 		return None
 
@@ -22,9 +23,12 @@ def read_price_list():
 			price_list.append(cell.value)
 
 	price_list_done = {price_list[i]: price_list[i+1] for i in range(0, len(price_list) - 1, 2)}
+
+	if len(price_list_done) == 0:
+		return None
+
 	price_list_done.pop(None)
 	workbook.close()
-	workbook.save('ZP.xlsx')
 	return price_list_done
 
 
@@ -41,5 +45,4 @@ def calculate_price(object_work):
 
 
 if __name__ == "__main__":
-	read_price_list()
 	print(calculate_price([0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))
