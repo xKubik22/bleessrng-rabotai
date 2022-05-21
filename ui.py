@@ -23,7 +23,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.att_pdn_box.toggled.connect(self.show_pdn_widgets)
         self.ui.done_button.clicked.connect(self.execute)
 
-    def execute(self):
+    def get_works(self):
         works = [0] * 19
         index = indexes
 
@@ -63,9 +63,11 @@ class MainWindow(QtWidgets.QMainWindow):
             works[index['СИ']] = self.ui.di_pemin_si_count_box.value()
             works[index['Соната']] = self.ui.di_pemin_szi_count_box.value()
 
+        return works
+
+    def execute(self):
+        works = self.get_works()
         obj = Object(self.ui.obj_name_entery.text(), works)
-        print(obj.get_object_info())
-        print(works)
 
     def show_pdn_widgets(self):
         if self.ui.att_pdn_box.isChecked():
