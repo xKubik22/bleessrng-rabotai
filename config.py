@@ -1,5 +1,10 @@
 class Config:
-    PATH_TO_CALC_FILE = None
+    SETTINGS = \
+        {
+            'PATH_TO_CALC_FILE': None,
+            'PATH_TO_FOLDER_TEMPLATES': None,
+            'PATH_TO_WORK_FOLDER': None
+        }
 
 
     @classmethod
@@ -8,22 +13,54 @@ class Config:
             lines = file.readlines()
 
         for line in lines:
-            if line.find('path to calc file') != -1:
-                cls.PATH_TO_CALC_FILE = line.replace('path to calc file = ', '')
+            for field in cls.SETTINGS.keys():
+                if line.find(field) != -1:
+                    cls.SETTINGS[field] = line.replace(f'{field} = ', '').strip()
 
     @classmethod
-    def change_calc_file_path(cls, path: str):
+    def change_file_path(cls, path: str, flag: str) -> None:
+        """
+        :param path: Строка с новым маршрутом до файла
+        :param flag: Флаг, который определяет перезапись настроек
+        где 'w' - флаг для изменения пути до файлов рабочей директории
+        где 'с' - флаг для изменения пути до файлов расчетки
+        где 't' - флаг для изменения пути до файлов шаблонов
+        """
+        if flag == 'c':
+            flag = 'PATH_TO_CALC_FILE'
+        elif flag == 't':
+            flag = 'PATH_TO_FOLDER_TEMPLATES'
+        elif flag == 'w':
+            flag = 'PATH_TO_WORK_FOLDER'
+
         with open('user_settings.txt', mode='r', encoding='utf-8') as file:
             lines = file.readlines()
 
         with open('user_settings.txt', mode='w', encoding='utf-8') as file:
             for line in lines:
-                if 'path to calc file' in line:
-                    file.write(f"path to calc file = {path}")
+                if flag in line:
+                    file.write(f"{flag} = {path}\n")
                 else:
                     file.write(line)
 
         cls.init_settings()
 
+    @classmethod
+    def get_calc_path(cls):
+        return cls.SETTINGS['PATH_TO_CALC_FILE']
+
+    @classmethod
+    def get_work_folder_path(cls):
+        return cls.SETTINGS['PATH_TO_WORK_FOLDER']
+
+    @classmethod
+    def get_templates_path(cls):
+        return cls.SETTINGS['PATH_TO_FOLDER_TEMPLATES']
+
+
 
 Config.init_settings()
+Config.change_file_path('1111\n', 'w')
+# for field in dir(Config):
+#     if field.isupper():
+#      print(field)

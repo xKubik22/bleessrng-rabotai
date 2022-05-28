@@ -1,1 +1,11 @@
-path to calc file = C:\Users\bolog\Desktop\ZP.xlsx
+PATH_TO_CALC_FILE = B:\расчетка\ZP.xlsx
+PATH_TO_FOLDER_TEMPLATES =
+PATH_TO_WORK_FOLDER = 1111
+
+
+
+
+
+
+
+

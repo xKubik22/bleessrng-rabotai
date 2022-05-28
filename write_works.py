@@ -4,7 +4,7 @@ from works_indexes import indexes
 
 
 class WorksAdder:
-	PATH = Config.PATH_TO_CALC_FILE
+	PATH = None
 
 	def __init__(self, obj):
 		self.init_path()
@@ -19,7 +19,7 @@ class WorksAdder:
 
 	@classmethod
 	def init_path(cls):
-		cls.PATH = Config.PATH_TO_CALC_FILE
+		cls.PATH = Config.get_calc_path()
 
 	def __del__(self):
 		pass

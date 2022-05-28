@@ -31,7 +31,7 @@ class MainWindow(QtWidgets.QMainWindow):
         path = QtWidgets.QFileDialog.getOpenFileName(self, 'Выбор файла расчета')[0]
         if len(path) != 0:
             path = path.replace('/', '\\')
-            Config.change_calc_file_path(path)
+            Config.change_file_path(path, 'c')
 
     def get_works(self):
             works = [0] * 19
